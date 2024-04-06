@@ -75,7 +75,7 @@ Description: This query retrieves two documents from the collection, and the ord
 ```python
 db.listings_clean.find().limit(2)
 ```
-The result shown (up to first three)
+The result shown (up to first three):
 `````
 {
   "_id": {
@@ -192,6 +192,128 @@ The result shown (up to first three)
   "reviews_per_month": 0.34
 }
 
+{
+  "_id": {
+    "$oid": "6610d6366bce64540e9f1e97"
+  },
+  "id": 776810,
+  "listing_url": "https://www.airbnb.com/rooms/776810",
+  "scrape_id": {
+    "$numberLong": "20240222071419"
+  },
+  "last_scraped": {
+    "$date": "2024-02-22T00:00:00.000Z"
+  },
+  "source": "city scrape",
+  "name": "Goldies Bohemian Loft",
+  "neighborhood_overview": "15 min walk to downtown Dallas and American Airlines center. Seven minute drive to Lovefield airport , 20 minute drive to DFW",
+  "picture_url": "https://a0.muscache.com/pictures/9201ddbc-b015-415b-a95a-80a2d3af01c1.jpg",
+  "host_id": 4096626,
+  "host_url": "https://www.airbnb.com/users/show/4096626",
+  "host_name": "Eric",
+  "host_since": {
+    "$date": "2012-11-08T00:00:00.000Z"
+  },
+  "host_location": "Seattle, WA",
+  "host_about": "Hi, my name is Eric and I work globally as a remote duty paramedic . I live in the Seattle area . I've been Airbnb'ing since 2012. Please contact me with any questions.",
+  "host_response_time": "within an hour",
+  "host_response_rate": "100%",
+  "host_acceptance_rate": "0%",
+  "host_is_superhost": false,
+  "host_thumbnail_url": "https://a0.muscache.com/im/pictures/user/85293a6b-b373-4ebe-9668-16dc48432b61.jpg?aki_policy=profile_small",
+  "host_picture_url": "https://a0.muscache.com/im/pictures/user/85293a6b-b373-4ebe-9668-16dc48432b61.jpg?aki_policy=profile_x_medium",
+  "host_neighbourhood": "Oak Lawn",
+  "host_listings_count": 1,
+  "host_total_listings_count": 1,
+  "host_verifications": "['email', 'phone']",
+  "host_has_profile_pic": true,
+  "host_identity_verified": true,
+  "neighbourhood": "Dallas, Texas, United States",
+  "neighbourhood_cleansed": "District 2",
+  "latitude": 32.81462,
+  "longitude": -96.81586,
+  "property_type": "Entire loft",
+  "room_type": "Entire home/apt",
+  "accommodates": 2,
+  "bathrooms": 1.5,
+  "bathrooms_text": "1.5 baths",
+  "bedrooms": 1,
+  "beds": 1,
+  "amenities": [
+    "Stove",
+    "Kitchen",
+    "Washer",
+    "Essentials",
+    "Hangers",
+    "Coffee maker",
+    "Hair dryer",
+    "Dishes and silverware",
+    "Bathtub",
+    "Extra pillows and blankets",
+    "Refrigerator",
+    "Luggage dropoff allowed",
+    "Carbon monoxide alarm",
+    "Oven",
+    "Smoke alarm",
+    "Backyard",
+    "Dishwasher",
+    "Fire extinguisher",
+    "Free parking on premises",
+    "Bed linens",
+    "Cooking basics",
+    "Patio or balcony",
+    "Microwave",
+    "Cleaning available during stay",
+    "Wifi",
+    "Hot water",
+    "Heating",
+    "Air conditioning",
+    "Shampoo",
+    "BBQ grill",
+    "Long term stays allowed",
+    "Dryer",
+    "Pool"
+  ],
+  "price": "$75.00",
+  "minimum_nights": 5,
+  "maximum_nights": 1125,
+  "minimum_minimum_nights": 5,
+  "maximum_minimum_nights": 5,
+  "minimum_maximum_nights": 1125,
+  "maximum_maximum_nights": 1125,
+  "minimum_nights_avg_ntm": 5,
+  "maximum_nights_avg_ntm": 1125,
+  "has_availability": true,
+  "availability_30": 18,
+  "availability_60": 43,
+  "availability_90": 49,
+  "availability_365": 320,
+  "calendar_last_scraped": {
+    "$date": "2024-02-22T00:00:00.000Z"
+  },
+  "number_of_reviews": 29,
+  "number_of_reviews_ltm": 0,
+  "number_of_reviews_l30d": 0,
+  "first_review": {
+    "$date": "2012-11-16T00:00:00.000Z"
+  },
+  "last_review": {
+    "$date": "2020-03-26T00:00:00.000Z"
+  },
+  "review_scores_rating": 4.9,
+  "review_scores_accuracy": 4.89,
+  "review_scores_cleanliness": 4.71,
+  "review_scores_checkin": 4.89,
+  "review_scores_communication": 4.96,
+  "review_scores_location": 5,
+  "review_scores_value": 4.78,
+  "instant_bookable": false,
+  "calculated_host_listings_count": 1,
+  "calculated_host_listings_count_entire_homes": 1,
+  "calculated_host_listings_count_private_rooms": 0,
+  "calculated_host_listings_count_shared_rooms": 0,
+  "reviews_per_month": 0.21
+}
 `````
  Insights the analysis shows: This analysis can be used to get a quick sample of the dataset for the viewer. By examining these documents, they can gain a preliminary understanding of the data structure and contents.
 
@@ -201,7 +323,9 @@ The result shown (up to first three)
 db.listings_clean.find().limit(10).pretty()
 ```
 
+
 ### Query 3: Show All Listings for Two Specific Superhosts (only show the name, price, neighbourhood, host_name, and host_is_superhost for each result)
+Description: This query shows all listings from two superhosts which is identified by their host_id. Only the specified fields are displayed.
 ```python
 db.listings_clean.find(
   {
@@ -213,7 +337,7 @@ db.listings_clean.find(
   }
 )
 ```
-Up to the first three results
+The 
 `````
 {
   "name": "Amazing location walk to Downtown Dallas",
@@ -237,31 +361,87 @@ Up to the first three results
   "price": "$95.00"
 }
 `````
+Insights the analysis shows: This data can help the viewer focuses on theo two specific superhosts in the listings. This may can highlight the variance in offerings and price points from specific top-rated hosts.
+
 
 ### Query 4:  Find All Unique Host Names
+Description: The query retrieves a list of all unique host_name values from the collection.
 ```python
 db.listings_clean.distinct("host_name")
 ```
-### Query 5:  Find All Unique Host Names
+The result shown (up to first three):
+`````
+{
+  "_id": "A-Solutions BnB"
+}
+{
+  "_id": "Aaja"
+}
+{
+  "_id": "Aamir"
+}
+`````
+Insights the analysis shows: This query gives us a sense of the diversity of hosts in the dataset.
+
+### Query 5:  Find all of the places that have more than 2 beds in a neighborhood
+Description: Finds all listings with more than 2 beds in a specific neighborhood ( I refer to neighbourhood_cleansed, I choose the neighborhood of "District 2"), ordered by review score rating descending.
 ```python
 db.listings_clean.find(
   {
     beds: { $gt: 2 },
-    neighbourhood: "YourNeighborhood"
+    neighbourhood: "District 2"
   },
   {
     name: 1, beds: 1, review_scores_rating: 1, price: 1
   }
 ).sort({ review_scores_rating: -1 })
 ```
+The result shown (up to first three):
+`````
+{
+  "name": "Business / Corporate  Travelers",
+  "beds": 1,
+  "price": "$150.00",
+  "review_scores_rating": 5
+}
+{
+  "name": "Art Loft with Zen Den - Cedars / Downtown Dallas",
+  "beds": 1,
+  "price": "$94.00",
+  "review_scores_rating": 5
+}
+`````
+Insights the analysis shows: The viewers who want to search for the airbnb with more than 2 beds in a specific neighbourhood can quickly get the information. Also, they can identify which larger accommodations are rated highly by guests.
+
 ### Query 6:  Show the number of listings per host
+Description: Groups the documents in the collection by host_id to count the number of listings each host has.
 ```python
 db.listings_clean.aggregate([
   { $group: { _id: "$host_id", count: { $sum: 1 } } }
 ])
 ```
+The result shown (up to first three):
+`````
+{
+  "_id": 108514926,
+  "count": 165
+}
+{
+  "_id": 498579365,
+  "count": 103
+}
+{
+  "_id": 43042344,
+  "count": 79
+}
+`````
+Insights the analysis shows: This aggregation query helps viewer to understand the distribution of listings among hosts. In this case, the viewer can identify those who are more investment-heavy.
+
+// Results will be added after execution
+
 
 ### Query 7:  Find the Average Review Scores Rating per Neighborhood
+Description: Calculates the average review_scores_rating per neighborhood, showing only those averages that are 4 or above, sorted in descending order of rating.
 ```python
 db.listings_clean.aggregate([
   { $group: { _id: "$neighbourhood", averageRating: { $avg: "$review_scores_rating" } } },
@@ -269,3 +449,23 @@ db.listings_clean.aggregate([
   { $sort: { averageRating: -1 } }
 ])
 ```
+The result shown (up to first four, in order to show decending orer):
+`````
+{
+  "_id": " Frisco , Texas, United States",
+  "averageRating": 5
+}
+{
+  "_id": "Heath, Texas, United States",
+  "averageRating": 5
+}
+{
+  "_id": "Garland, Texas, United States",
+  "averageRating": 5
+}
+{
+  "_id": "TX , United States",
+  "averageRating": 4.97
+}
+`````
+Insights the analysis shows: The viewer can quickly see the general satisfaction guests have in various neighborhoods. It is useful for potential hosts and guests looking for high-quality neighborhoods.
