@@ -32,7 +32,32 @@ The format of the original data file is in CVS.
 | 2762537 | https://www.airbnb.com/rooms/2762537 | 2.02402E+13 | 2024/2/22    | city scrape | Safe Uptown Studio 7A Free Fast WIFI Private Entry | Welcome to the Knox District, a neighborhood that needs to be appreciated. Dallas’s history rich and beloved SAFE, live-work-play destinations.<br /><br />Comfortable 1 bd/1b<br /><br />WALKABLE - The Katy Trail with miles of walking, jogging, and biking pleasure is a few blocks away. There are wonderful places to see and visit.<br /><br />WALKABLE - Plethora of shops, restaurants, bistros, and bars (including an Apple Computer Super Store) are within easy walking distance. Trader Joe's supermarket is two blocks away. | Great Community to Live, Work and Play<br />Located in the trendy Knox Districted area of Uptown Dallas<br />Fabulous Central Location<br />Family Owned and Operated<br />Our Guests have said “we didn’t need our car”<br />THE PICTURES AND REVIEWS TELL IT ALL!!!<br />Lots to do with about 30 restaurants, bistros, and bars within safe, easy walking distance<br />Plethora of shops, boutiques and stores including a Apple Computer Super Store<br />Trader Joe’s Supermarket 2 blocks away<br />Katy Trail, Only three blocks away, it is a 15 mile long walking, jogging and biking trail<br /><br />We are close to Downtown Dallas - the Arts District - Deep Ellum - Fair Park - the Science Center - Perot Science Museum – the West End District – the American Airlines Center -  the Klyde Warren Park which is built over the Woodall Rodgers Freeway - George W. Bush Presidential Center and Library - Lower Greenville with all of its restaurants and nightclubs | https://a0.muscache.com/pictures/ddc494f2-90ad-4b25-b10b-25c6c622c814.jpg                                | 6063232  | https://www.airbnb.com/users/show/6063232  | Joan        | 2013/4/23  | Dallas, TX    | Hello, I am Joan.  I was born in Czechoslovakia and I have lived in Czechoslovakia, Austria, Canada and now Dallas, TX.  I have traveled extensively in Europe, Canada, Costa Rica and the United States.  My favorite places are Tuscany, Italy; Prague, Czech Republic; Toronto, Canada; San Jose, Costa Rica; and southern California, plus Dallas.  I speak fluent Czech, understand most Slavic languages, and even speak a little German.  I enjoy life, exercise, the coasts and the beach, good dining, theatre, music and travel.  I love my work managing my apartments and caring for my tenants and guests.                                                                                                                                                                                                                                                               | within an hour     | 100%               | 96%                  | f                 | https://a0.muscache.com/im/users/6063232/profile_pic/1368294811/original.jpg?aki_policy=profile_small      | https://a0.muscache.com/im/users/6063232/profile_pic/1368294811/original.jpg?aki_policy=profile_x_medium      | Central Dallas                         | 9                   | 11                        | ['email', 'phone']               | t                    | t                      | Dallas, Texas, United States | District 14            |                              | 32.81821  | -96.78901  | Entire rental unit                | Entire home/apt | 2            | 1         | 1 bath         | 0        | 1    | ["Portable fans", "Kitchen", "Free street parking", "Washer", "Free dryer \u2013 In building", "Room-darkening shades", "Essentials", "Hangers", "Outdoor dining area", "Hair dryer", "Bathtub", "Dishes and silverware", "Extra pillows and blankets", "Free driveway parking on premises \u2013 1 space", "Window AC unit", "Coffee maker: drip coffee maker", "Outdoor furniture", "Central heating", "Luggage dropoff allowed", "Carbon monoxide alarm", "Central air conditioning", "Smoke alarm", "Ethernet connection", "Fire extinguisher", "TV with standard cable", "Clothing storage: closet and dresser", "Mini fridge", "Toaster", "Iron", "Bed linens", "Cooking basics", "Microwave", "Cleaning available during stay", "Wifi", "Hot water", "Wine glasses", "Laundromat nearby", "Dining table", "Shampoo", "Self check-in", "Shared patio or balcony", "Long term stays allowed", "Keypad", "Portable heater", "Security cameras on property"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | $89.00   | 3              | 1125           | 3                      | 3                      | 1125                   | 1125                   | 3                      | 1125                   |                  | t                | 0               | 0               | 0               | 184              | 2024/2/22             | 81                | 8                     | 0                      | 2014/5/10    | 2023/12/29  | 4.72                 | 4.74                   | 4.84                      | 4.84                  | 4.81                        | 4.94                   | 4.75                |         | t                | 9                              | 9                                           | 0                                            | 0                                           | 0.68              |
 
 ### Problems present in the data.
-Upon observing the original data, several issues necessitated attention before import:
+Upon observing the original data, several issues necessitated attention before import
+1. Some descriptions contained HTML tags like `<br />`, which could disrupt text processing and data analysis. So I remove all of these HTML tags, in order to make the description more readable.
+Example: "Close to downtown and Uptown.  Fast and convenient to highway, grocery shops, dinner, clubbing and much more. Very modern home.<br /><br />Pets welcomed with approval and additional fee $100 per pet."
+I use the following python code to remove it
+```python
+def clean_html_tags(text):
+    return re.sub(r'<[^>]+>', '', text)
+```
+2. Some numeric fields such as price included currency symbols and commas, making them unsuitable for numerical operations. I convert then to a float type. In this case, we can make comparison on the price.
+Example: "$80"
+I use the following python code to change it
+```python
+def clean_price(price):
+    return float(re.sub(r'[$,]', '', price))
+```
+
+3. The amenities were listed in a single string, enclosed within square brackets and separated by commas, rather than as an array of strings. I transform it into a list of amenities. In this case, it could have a better structure and easy to categorize.
+Example: "["Kitchen", "Gym", "Washer", "Essentials", "Hangers", "Hair dryer", "Dishes and silverware", "Pets allowed", "Carbon monoxide alarm", "Smoke alarm", "Shared pool", "Fire extinguisher", "TV with standard cable", "Free parking on premises", "Iron", "Wifi", "Hot water", "Self check-in", "Heating", "Air conditioning", "Shampoo", "Long term stays allowed", "Keypad", "Dryer"]"
+I use the following python code to change it
+```python
+def clean_amenities(amenities):
+    amenities = amenities.strip('[]').split(', ')
+    amenities = [amenity.strip('"') for amenity in amenities]
+    return amenities
+```
+
 
 ## Analysis
 ### Query 1: Show Exactly Two Documents
@@ -40,3 +65,29 @@ Upon observing the original data, several issues necessitated attention before i
 db.listings.find().limit(2)
 ```
 
+
+
+### Query 3:
+`````
+{
+  "name": "Amazing location walk to Downtown Dallas",
+  "host_name": "Michelle",
+  "host_is_superhost": true,
+  "neighbourhood": "Dallas, Texas, United States",
+  "price": "$243.00"
+}
+{
+  "name": "Sunny/MStreet/SMU/Trendy Greenville/Private Bath",
+  "host_name": "Holly",
+  "host_is_superhost": true,
+  "neighbourhood": "Dallas, Texas, United States",
+  "price": "$90.00"
+}
+{
+  "name": "Sunny Bedroom/MStreet/SMU/Trendy Greenville Ave",
+  "host_name": "Holly",
+  "host_is_superhost": true,
+  "neighbourhood": "Dallas, Texas, United States",
+  "price": "$95.00"
+}
+`````

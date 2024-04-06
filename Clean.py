@@ -2,15 +2,12 @@ import csv
 import re
 
 def clean_html_tags(text):
-    """Remove HTML tags from text."""
     return re.sub(r'<[^>]+>', '', text)
 
 def clean_price(price):
-    """Remove dollar sign and commas from price and convert to float."""
     return float(re.sub(r'[$,]', '', price))
 
 def clean_amenities(amenities):
-    """Clean and convert amenities list from string to list."""
     # Removing the leading and trailing square brackets and splitting by ', '
     amenities = amenities.strip('[]').split(', ')
     # Removing quotes from each amenity
