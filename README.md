@@ -34,14 +34,18 @@ The format of the original data file is in CVS.
 ### Problems present in the data.
 Upon observing the original data, several issues necessitated attention before import
 1. Some descriptions contained HTML tags like `<br />`, which could disrupt text processing and data analysis. So I remove all of these HTML tags, in order to make the description more readable.
+`````
 Example: "Close to downtown and Uptown.  Fast and convenient to highway, grocery shops, dinner, clubbing and much more. Very modern home.<br /><br />Pets welcomed with approval and additional fee $100 per pet."
+`````
 I use the following python code to remove it
 ```python
 def clean_html_tags(text):
     return re.sub(r'<[^>]+>', '', text)
 ```
 2. Some numeric fields such as price included currency symbols and commas, making them unsuitable for numerical operations. I convert then to a float type. In this case, we can make comparison on the price.
+`````
 Example: "$80"
+`````
 I use the following python code to change it
 ```python
 def clean_price(price):
@@ -49,7 +53,9 @@ def clean_price(price):
 ```
 
 3. The amenities were listed in a single string, enclosed within square brackets and separated by commas, rather than as an array of strings. I transform it into a list of amenities. In this case, it could have a better structure and easy to categorize.
+`````
 Example: "["Kitchen", "Gym", "Washer", "Essentials", "Hangers", "Hair dryer", "Dishes and silverware", "Pets allowed", "Carbon monoxide alarm", "Smoke alarm", "Shared pool", "Fire extinguisher", "TV with standard cable", "Free parking on premises", "Iron", "Wifi", "Hot water", "Self check-in", "Heating", "Air conditioning", "Shampoo", "Long term stays allowed", "Keypad", "Dryer"]"
+`````
 I use the following python code to change it
 ```python
 def clean_amenities(amenities):
