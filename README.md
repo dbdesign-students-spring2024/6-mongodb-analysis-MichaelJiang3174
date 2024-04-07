@@ -729,25 +729,25 @@ db.listings_clean.find(
 The 
 `````
 {
-  "name": "Amazing location walk to Downtown Dallas",
-  "host_name": "Michelle",
-  "host_is_superhost": true,
-  "neighbourhood": "Dallas, Texas, United States",
-  "price": "$243.00"
+  name: 'Amazing location walk to Downtown Dallas',
+  host_name: 'Michelle',
+  host_is_superhost: true,
+  neighbourhood: 'Dallas, Texas, United States',
+  price: '$243.00'
 }
 {
-  "name": "Sunny/MStreet/SMU/Trendy Greenville/Private Bath",
-  "host_name": "Holly",
-  "host_is_superhost": true,
-  "neighbourhood": "Dallas, Texas, United States",
-  "price": "$90.00"
+  name: "Sunny/MStreet/SMU/Trendy Greenville/Private Bath",
+  host_name: "Holly",
+  host_is_superhost: true,
+  neighbourhood: "Dallas, Texas, United States",
+  price: "$90.00"
 }
 {
-  "name": "Sunny Bedroom/MStreet/SMU/Trendy Greenville Ave",
-  "host_name": "Holly",
-  "host_is_superhost": true,
-  "neighbourhood": "Dallas, Texas, United States",
-  "price": "$95.00"
+  name: 'Sunny Bedroom/MStreet/SMU/Trendy Greenville Ave',
+  host_name: 'Holly',
+  host_is_superhost: true,
+  neighbourhood: 'Dallas, Texas, United States',
+  price: '$95.00'
 }
 `````
 Insights the analysis shows: This data can help the viewer focuses on theo two specific superhosts in the listings. This may can highlight the variance in offerings and price points from specific top-rated hosts.
@@ -760,15 +760,11 @@ db.listings_clean.distinct("host_name")
 ```
 The result shown (up to first three):
 `````
-{
-  "_id": "A-Solutions BnB"
-}
-{
-  "_id": "Aaja"
-}
-{
-  "_id": "Aamir"
-}
+[
+    'A-Solutions BnB'         'Aaja',            'Aamir',
+    'Aaeliss',                'Aahanmord',       'Aaili',
+    ...
+]
 `````
 Insights the analysis shows: This query gives us a sense of the diversity of hosts in the dataset.
 
@@ -788,16 +784,16 @@ db.listings_clean.find(
 The result shown (up to first three):
 `````
 {
-  "name": "Business / Corporate  Travelers",
-  "beds": 1,
-  "price": "$150.00",
-  "review_scores_rating": 5
+  name: 'Business / Corporate  Travelers',
+  beds: 1,
+  price: '$150.00',
+  review_scores_rating: 5
 }
 {
-  "name": "Art Loft with Zen Den - Cedars / Downtown Dallas",
-  "beds": 1,
-  "price": "$94.00",
-  "review_scores_rating": 5
+  name: 'Art Loft with Zen Den - Cedars / Downtown Dallas',
+  beds: 1,
+  price: '$94.00',
+  review_scores_rating: 5
 }
 `````
 Insights the analysis shows: The viewers who want to search for the airbnb with more than 2 beds in a specific neighbourhood can quickly get the information. Also, they can identify which larger accommodations are rated highly by guests.
@@ -812,16 +808,16 @@ db.listings_clean.aggregate([
 The result shown (up to first three):
 `````
 {
-  "_id": 108514926,
-  "count": 165
+  _id: 108514926,
+  count: 165
 }
 {
-  "_id": 498579365,
-  "count": 103
+  _id: 498579365,
+  count: 103
 }
 {
-  "_id": 43042344,
-  "count": 79
+  _id: 43042344,
+  count: 79
 }
 `````
 Insights the analysis shows: This aggregation query helps viewer to understand the distribution of listings among hosts. In this case, the viewer can identify those who are more investment-heavy.
@@ -841,20 +837,20 @@ db.listings_clean.aggregate([
 The result shown (up to first four, in order to show decending orer):
 `````
 {
-  "_id": " Frisco , Texas, United States",
-  "averageRating": 5
+  _id: 'Frisco , Texas, United States',
+  averageRating: 5
 }
 {
-  "_id": "Heath, Texas, United States",
-  "averageRating": 5
+  _id: 'Heath, Texas, United States',
+  averageRating: 5
 }
 {
-  "_id": "Garland, Texas, United States",
-  "averageRating": 5
+  _id: 'Garland, Texas, United States',
+  averageRating: 5
 }
 {
-  "_id": "TX , United States",
-  "averageRating": 4.97
+  _id: 'TX , United States',
+  averageRating: 4.97
 }
 `````
 Insights the analysis shows: The viewer can quickly see the general satisfaction guests have in various neighborhoods. It is useful for potential hosts and guests looking for high-quality neighborhoods.
