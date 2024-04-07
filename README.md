@@ -78,13 +78,11 @@ db.listings_clean.find().limit(2)
 The result shown (up to first three):
 `````
 {
-  "_id": {
-    "$oid": "6610d6366bce64540e9f1e96"
-  },
-  "id": 61878,
-  "listing_url": "https://www.airbnb.com/rooms/61878",
-  "scrape_id": {
-    "$numberLong": "20240222071419"
+  _id: ObjectId("6610d6366bce64540e9f1e96"),
+  id: 61878,
+  listing_url: "https://www.airbnb.com/rooms/61878",
+  scrape_id: {
+    $numberLong: "20240222071419"
   },
   "last_scraped": {
     "$date": "2024-02-22T00:00:00.000Z"
@@ -193,9 +191,7 @@ The result shown (up to first three):
 }
 
 {
-  "_id": {
-    "$oid": "6610d6366bce64540e9f1e97"
-  },
+  "_id: ObjectId("6610d6366bce64540e9f1e97"),
   "id": 776810,
   "listing_url": "https://www.airbnb.com/rooms/776810",
   "scrape_id": {
@@ -326,9 +322,7 @@ db.listings_clean.find().limit(10).pretty()
 The result shown (up to first three):
 `````
 {
-  "_id": {
-    "$oid": "6610d6366bce64540e9f1e96"
-  },
+  "_id: ObjectId("6610d6366bce64540e9f1e96"),
   "id": 61878,
   "listing_url": "https://www.airbnb.com/rooms/61878",
   "scrape_id": {
